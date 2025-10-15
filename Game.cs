@@ -1,10 +1,14 @@
-﻿namespace HauntedHouse;
+﻿using System.Runtime.CompilerServices;
+
+namespace HauntedHouse;
 
 public class Game
 {
+    
     private RoomData _roomData; 
     private MovementController movementController;
     private RoomController roomController;
+    private Player player;
     private bool playing;
 
     public Game()
@@ -15,6 +19,7 @@ public class Game
 
     public void Run()
     {
+        
         while (playing)
         {
             roomController.PlayDialogue();
@@ -26,12 +31,26 @@ public class Game
             }
             movementController.Move(pressedKey);
         }
+        
     }
+
+    public void OnPlayerDied()
+    {
+        Console.WriteLine("YOU DEAD");
+        playing = false;
+        return;
+    }
+
+    
     
     private void CreateDependencies()
     {
         _roomData = new RoomData();
         roomController = new RoomController(_roomData);
-        movementController = new MovementController(roomController);
+        movementController = new MovementController(roomController, _roomData);
+        player = new Player(this);
     }
+    
+    
+    
 }

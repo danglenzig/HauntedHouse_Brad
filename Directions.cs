@@ -6,4 +6,8 @@ public enum Directions
     Down,
     Left,
     Right,
+    //North,
+    //South,
+    //East,
+    //West
 }

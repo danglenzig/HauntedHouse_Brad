@@ -2,7 +2,10 @@
 
 public class Room
 {
+    
     public string RoomId;
+    public string DisplayName;
+    public bool IsVertical;
     public List<string> Dialogues = new ();
     public Dictionary<Directions, string> AdjacentRooms = new ();
     
@@ -44,9 +47,22 @@ public class Room
             return this;
         }
 
+        public RoomBuilder AddRoomOrientation(bool isVerical)
+        {
+            room.IsVertical = isVerical;
+            return this;
+        }
+
+        public RoomBuilder AddDisplayName(string displayName)
+        {
+            room.DisplayName = displayName;
+            return this;
+        }
+
         public Room Build()
         {
             return room;
         }
     }
+    
 }

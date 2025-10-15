@@ -2,11 +2,14 @@
 
 public class MovementController
 {
+    
     private readonly RoomController roomController;
+    private readonly RoomData roomData;
 
-    public MovementController(RoomController roomController)
+    public MovementController(RoomController roomController, RoomData roomData)
     {
         this.roomController = roomController;
+        this.roomData = roomData;
     }
     
     public ConsoleKey StateDirections(Room currentRoom)
@@ -16,7 +19,45 @@ public class MovementController
 
         foreach (var adjacentRoom in currentRoom.AdjacentRooms)
         {
-            Console.WriteLine($"\t- {adjacentRoom.Key} : {adjacentRoom.Value}");
+            string displayName = roomData.GetDisplayNameFromId(adjacentRoom.Value);
+            string directionString = "";
+
+            
+            
+            bool roomIsVertical = currentRoom.IsVertical;
+            if (roomIsVertical)
+            {
+                switch (adjacentRoom.Key)
+                {
+                    case Directions.Up:
+                        directionString = $"Up to {displayName}";
+                        break;
+                    case Directions.Down:
+                        directionString = $"Down to {displayName}";
+                        break;
+                }
+            }
+            else
+            {
+                switch (adjacentRoom.Key)
+                {
+                    case Directions.Up:
+                        directionString = $"North to {displayName}";
+                        break;
+                    case Directions.Down:
+                        directionString = $"South to {displayName}";
+                        break;
+                    case Directions.Left:
+                        directionString = $"East to {displayName}";
+                        break;
+                    case Directions.Right:
+                        directionString = $"West to {displayName}";
+                        break;
+                }
+            }
+            
+            
+            Console.WriteLine($"\t- {adjacentRoom.Key} : {directionString}");
         }
         
         Console.WriteLine("\nPress any corresponding arrow keys to continue..\n");
@@ -34,8 +75,10 @@ public class MovementController
             ConsoleKey.DownArrow => roomController.CurrentRoom.AdjacentRooms[Directions.Down],
             ConsoleKey.LeftArrow => roomController.CurrentRoom.AdjacentRooms[Directions.Left],
             ConsoleKey.RightArrow => roomController.CurrentRoom.AdjacentRooms[Directions.Right],
+            
         };
         
         roomController.LoadRoom(moveToRoom);
     }
+    
 }

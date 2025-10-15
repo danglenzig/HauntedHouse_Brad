@@ -2,8 +2,9 @@
 
 public class RoomController
 {
+    
     // DO NOT CHANGE THIS ID, we always want to start in the entrance
-    private static string FirstRoomId = "Entrance";
+    private static string FirstRoomId = "Airlock";
     public Room CurrentRoom { get; private set; }
 
     private RoomData roomData;
@@ -24,4 +25,5 @@ public class RoomController
     {
         CurrentRoom.PlayDialogues();
     }
+    
 }

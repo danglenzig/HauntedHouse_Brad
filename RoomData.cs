@@ -2,7 +2,13 @@
 
 public class RoomData
 {
+    
     private Dictionary<string, Room> rooms = new();
+
+    //public Dictionary<string, Room> Rooms
+    //{
+    //    get => rooms;
+    //}
     
     public RoomData()
     {
@@ -16,6 +22,129 @@ public class RoomData
     
     private void CreateRooms()
     {
+        var airlock = new Room.RoomBuilder()
+            .AddRoomId("Airlock")
+            .AddDisplayName("airlock")
+            .AddRoomOrientation(false)
+            .AddDialogue("You step into the airlock. The walls are scuffed with suit scratches, and a faint mist of\ncondensation drifts in the cold air.")
+            .AddDialogue("The silence feels wrong")
+            .AddAdjacentRoom(Directions.Up, "CentralCorridor")
+            .Build();
+        rooms.Add("Airlock", airlock);
+
+        var centralCorridor = new Room.RoomBuilder()
+            .AddRoomId("CentralCorridor")
+            .AddDisplayName("central corridor")
+            .AddRoomOrientation(false)
+            .AddDialogue(
+                "A wide passageway lined with darkened display panels and flickering overhead lights.\nScattered crates make it easy for something to hide.")
+            .AddAdjacentRoom(Directions.Down, "Airlock")
+            .AddAdjacentRoom(Directions.Right, "CrewQuarters")
+            .AddAdjacentRoom(Directions.Up, "Bridge")
+            .AddAdjacentRoom(Directions.Left, "MedicalBay")
+            .Build();
+        rooms.Add("CentralCorridor", centralCorridor);
+
+        var bridge = new Room.RoomBuilder()
+            .AddRoomId("Bridge")
+            .AddDisplayName("bridge")
+            .AddRoomOrientation(false)
+            .AddDialogue(
+                "The ship’s nerve center. The captain’s chair is empty, the consoles dead except for a faint\nblinking error on the navigation system.")
+            .AddAdjacentRoom(Directions.Up, "Turbolift")
+            .AddAdjacentRoom(Directions.Right, "ObservationDeck")
+            .AddAdjacentRoom(Directions.Down, "CentralCorridor")
+            .Build();
+        rooms.Add("Bridge", bridge);
+
+        var observationDeck = new Room.RoomBuilder()
+            .AddRoomId("ObservationDeck")
+            .AddDisplayName("observation deck")
+            .AddRoomOrientation(false)
+            .AddDialogue("A glass dome opens to the black infinity of space.")
+            .AddDialogue("Streaks of blood smear across the viewport as though someone was dragged.")
+            .AddAdjacentRoom(Directions.Left, "Bridge")
+            .Build();
+        rooms.Add("ObservationDeck", observationDeck);
+
+        var turbolift = new Room.RoomBuilder()
+            .AddRoomId("Turbolift")
+            .AddDisplayName("turbolift")
+            .AddRoomOrientation(true)
+            .AddDialogue("You're in the ship's central turbolift. It has two buttons: UP and DOWN")
+            .AddAdjacentRoom(Directions.Up, "Bridge")
+            .AddAdjacentRoom(Directions.Down, "Engineering")
+            .Build();
+        rooms.Add("Turbolift", turbolift);
+
+        var crewQuarters = new Room.RoomBuilder()
+            .AddRoomId("CrewQuarters")
+            .AddDisplayName("crew quarters")
+            .AddRoomOrientation(false)
+            .AddDialogue("Narrow bunks, personal effects scattered everywhere. Some metal lockers hang open,")
+            .AddDialogue("...others are bowed outward, as if clawed from the inside.")
+            .AddAdjacentRoom(Directions.Left, "CentralCorridor")
+            .AddAdjacentRoom(Directions.Right, "MessHall")
+            .Build();
+        rooms.Add("CrewQuarters", crewQuarters);
+
+        var messHall = new Room.RoomBuilder()
+            .AddRoomId("MessHall")
+            .AddDisplayName("mess hall")
+            .AddRoomOrientation(false)
+            .AddDialogue("A wide room with overturned tables and trays. The smell of rot mixes with burned food.")
+            .AddDialogue("A ceiling vent rattles as though something’s crawling inside")
+            .AddAdjacentRoom(Directions.Left, "CrewQuarters")
+            .Build();
+        rooms.Add("MessHall", messHall);
+
+        var medicalBay = new Room.RoomBuilder()
+            .AddRoomId("MedicalBay")
+            .AddDisplayName("medical bay")
+            .AddRoomOrientation(false)
+            .AddDialogue(
+                "Bright white tiles stained brown. Several operating beds hold motionless crew,\ntheir chests oddly swollen.")
+            .AddDialogue("Surgical tools are scattered everywhere")
+            .AddAdjacentRoom(Directions.Right, "CentralCorridor")
+            .AddAdjacentRoom(Directions.Up, "SpecimenLab")
+            .Build();
+        rooms.Add("MedicalBay", medicalBay);
+
+        var specimenLab = new Room.RoomBuilder()
+            .AddRoomId("SpecimenLab")
+            .AddDisplayName("specimen lab")
+            .AddRoomOrientation(false)
+            .AddDialogue("Glass tubes line the walls, most shattered. Strange organic growths spread across the floor.")
+            .AddDialogue("Whatever research was done here, it got out of control.")
+            .AddAdjacentRoom(Directions.Down, "MedicalBay")
+            .Build();
+        rooms.Add("SpecimenLab", specimenLab);
+
+        var engineering = new Room.RoomBuilder()
+            .AddRoomId("Engineering")
+            .AddDisplayName("main engineering")
+            .AddRoomOrientation(false)
+            .AddDialogue("The loud hum of the ship’s reactor is now only a faint irregular throb.")
+            .AddDialogue("Exposed pipes vent steam, and the room shudders occasionally as if alive.")
+            .AddAdjacentRoom(Directions.Right, "Turbolift")
+            .AddAdjacentRoom(Directions.Down, "CargoBay")
+            .Build();
+        rooms.Add("Engineering", engineering);
+
+        var cargoBay = new Room.RoomBuilder()
+            .AddRoomId("CargoBay")
+            .AddDisplayName("cargo bay")
+            .AddRoomOrientation(false)
+            .AddDialogue("This is the cargo bay.")
+            .AddAdjacentRoom(Directions.Up, "Engineering")
+            .Build();
+        rooms.Add("CargoBay", cargoBay);
+        
+
+
+        /*
+        USAGE PATTERN:
+
         var entrance = new Room.RoomBuilder()
             .AddRoomId("Entrance")
             .AddDialogue("Welcome to my House of Horrors!")
@@ -31,32 +160,16 @@ public class RoomData
             .Build();
 
         rooms.Add(entrance.RoomId, entrance);
-        
-        // Add more rooms here, continue with the Stairway, DiningRoom and Hallway
-        var stairway = new Room.RoomBuilder()
-            .AddRoomId("Stairway") // Add room id
-            .AddDialogue("Add Dialogues") // Add room dialogue(s)
-            .AddAdjacentRoom(Directions.Down, "Entrance")// Add adjacent room(s)
-            .Build();
-        
-        rooms.Add(stairway.RoomId, stairway);
-        
-        var diningRoom = new Room.RoomBuilder()
-            .AddRoomId("DiningRoom")
-            .AddDialogue("Add Dialogues")
-            .AddAdjacentRoom(Directions.Down, "Entrance")
-            .Build();
-        
-        rooms.Add(diningRoom.RoomId, diningRoom);
-        
-        var hallway = new Room.RoomBuilder()
-            .AddRoomId("Hallway")
-            .AddDialogue("Add Dialogues")
-            .AddAdjacentRoom(Directions.Down, "Entrance")
-            .Build();
-        
-        rooms.Add(hallway.RoomId, hallway);
-        
+
+
+        */
+
         // Continue adding more rooms
     }
+
+    public string GetDisplayNameFromId(string roomId)
+    {
+        return rooms[roomId].DisplayName;
+    }
+    
 }
