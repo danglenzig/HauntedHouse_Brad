@@ -1,4 +1,6 @@
-﻿namespace HauntedHouse;
+﻿using HauntedHouse;
+
+namespace HauntedHouse;
 
 public class RoomController
 {
@@ -6,12 +8,13 @@ public class RoomController
     // DO NOT CHANGE THIS ID, we always want to start in the entrance
     private static string FirstRoomId = "Airlock";
     public Room CurrentRoom { get; private set; }
-
+    private EnemyData enemyData;
     private RoomData roomData;
     private List<string> roomIds;
 
-    public RoomController(RoomData roomData)
+    public RoomController(RoomData roomData, EnemyData enemyData)
     {
+        this.enemyData = enemyData;
         this.roomData = roomData;
         LoadRoom(FirstRoomId);
     }
@@ -21,9 +24,16 @@ public class RoomController
         CurrentRoom = roomData.GetRoomData(roomName);
     }
 
-    public void PlayDialogue()
+    public void OnRoomEnter()
     {
-        CurrentRoom.PlayDialogues();
+        CurrentRoom.OnRoomEntered(enemyData);
     }
+
+    //public void PlayDialogue()
+    //{
+     //   CurrentRoom.PlayDialogues();
+    //}
+
+   
     
 }

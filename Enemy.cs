@@ -1,23 +1,43 @@
 ﻿namespace HauntedHouse;
 
-public class Player
+public class Enemy
 {
-    
-    public Player(Game _game, int _startHealth, int _startAttackDamage, int _startHealAmount, int _startBlockStrength)
+    /*
+    public Enemy(string _enemyName, string _roomId,int _health, int _attackDamage,  int _blockStrength)
     {
-        game = _game;
-        Health = _startHealth;
-        AttackDamage = _startAttackDamage;
-        HealAmount = _startHealAmount;
-        BlockStrength = _startBlockStrength;
+        EnemyName = _enemyName;
+        RoomId = _roomId;
+        Health = _health;
+        AttackDamage = _attackDamage;
+        BlockStrength = _blockStrength;
+        FlavorText = "";
     }
-    
-    private Game game;
+    */
     
     private const int maxHealth = 100;
-    private const int maxHealAmount = 30;
+    //private const int maxHealAmount = 30;
     private const int maxAttackDamage = 30;
     private const int maxBlockStrength = 30;
+
+
+    private string flavorText;
+
+    public string FlavorText
+    {
+        get => flavorText;
+        private set => flavorText = value;
+    }
+
+    private string roomId;
+
+    public string RoomId
+    {
+        get => roomId;
+        private set => roomId = value;
+    }
+    
+    private string enemyName;
+    public string EnemyName;
     
     private int health;
     public int Health
@@ -36,27 +56,6 @@ public class Player
             else
             {
                 health = value;
-            }
-        }
-    }
-
-    private int healAmount;
-    public int HealAmount
-    {
-        get => healAmount;
-        set
-        {
-            if (value < 0)
-            {
-                healAmount = 0;
-            }
-            else if (value > maxHealAmount)
-            {
-                healAmount = maxHealAmount;
-            }
-            else
-            {
-                healAmount = value;
             }
         }
     }
@@ -116,7 +115,12 @@ public class Player
         }
     }
 
-    public void Attack(Enemy enemy)
+    public void SetFlavorText(string _flavorText)
+    {
+        FlavorText = _flavorText;
+    }
+
+    public void Attack(Player player)
     {
         //
     }
@@ -136,13 +140,39 @@ public class Player
         //
     }
 
-    public void Retreat()
+    public class EnemyBuilder
     {
-        //
-    }
+        private Enemy enemy = new ();
 
-    private void Die()
-    {
-        game.OnPlayerDied();
+        public EnemyBuilder AddEnemyName(string _enemyName)
+        {
+            enemy.EnemyName = _enemyName;
+            return this;
+        }
+        public EnemyBuilder AddRoomId(string _roomId)
+        {
+            enemy.RoomId = _roomId;
+            return this;
+        }
+        public EnemyBuilder AddHealth(int _health)
+        {
+            enemy.Health= _health;
+            return this;
+        }
+        public EnemyBuilder AddAttackDamage(int _attackDamage)
+        {
+            enemy.AttackDamage= _attackDamage;
+            return this;
+        }
+        public EnemyBuilder AddBlockStrength(int _blockStrength)
+        {
+            enemy.BlockStrength= _blockStrength;
+            return this;
+        }
+        public Enemy Build()
+        {
+            return enemy;
+        }
     }
+    
 }

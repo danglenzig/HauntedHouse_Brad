@@ -1,11 +1,13 @@
 ﻿using System.Runtime.CompilerServices;
+using HauntedHouse;
 
 namespace HauntedHouse;
 
 public class Game
 {
     
-    private RoomData _roomData; 
+    private RoomData _roomData;
+    private EnemyData _enemyData;
     private MovementController movementController;
     private RoomController roomController;
     private Player player;
@@ -20,9 +22,13 @@ public class Game
     public void Run()
     {
         
+        Console.WriteLine("Welcome to the SS Calliope!");
+        // TODO: opening narration
+        
         while (playing)
         {
-            roomController.PlayDialogue();
+            roomController.OnRoomEnter();
+            //roomController.PlayDialogue();
             var pressedKey = movementController.StateDirections(roomController.CurrentRoom);
             if (pressedKey == ConsoleKey.Q)
             {
@@ -45,10 +51,13 @@ public class Game
     
     private void CreateDependencies()
     {
+        
+        player = new Player(this, 100, 10, 5, 5);
         _roomData = new RoomData();
-        roomController = new RoomController(_roomData);
+        _enemyData = new EnemyData();
+        roomController = new RoomController(_roomData, _enemyData);
         movementController = new MovementController(roomController, _roomData);
-        player = new Player(this);
+        
     }
     
     
