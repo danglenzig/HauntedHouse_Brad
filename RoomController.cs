@@ -5,7 +5,7 @@ namespace HauntedHouse;
 public class RoomController
 {
     
-    // DO NOT CHANGE THIS ID, we always want to start in the entrance
+    // DO NOT CHANGE THIS ID, we always want to start in the airlock
     private static string FirstRoomId = "Airlock";
     public Room CurrentRoom { get; private set; }
 
