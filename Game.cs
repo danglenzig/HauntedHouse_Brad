@@ -11,7 +11,16 @@ public class Game
     private MovementController movementController;
     private RoomController roomController;
     private Player player;
+    
     private bool playing;
+    public bool Playing
+    {
+        get=> playing;
+        set
+        {
+            playing = value;
+        }
+    }
     
     public RoomData _RoomData
     {
@@ -46,17 +55,9 @@ public class Game
         {
             roomController.OnRoomEnter();
             roomController.HandleRoomCombat();
-            //roomController.HandleRoomItems();
+            //roomController.HandleRoomItems(); //TODO
             roomController.OnRoomExit();
-            
-            
-            var pressedKey = movementController.StateDirections(roomController.CurrentRoom);
-            if (pressedKey == ConsoleKey.Q)
-            {
-               playing = false;
-                return;
-            }
-            movementController.Move(pressedKey);
+            movementController.HandleMovement(roomController.CurrentRoom); // <-- will set playing = false if Q is pressed, otherwise it ingests the arrow keys
         }
         
     }

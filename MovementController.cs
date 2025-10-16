@@ -2,7 +2,7 @@
 
 public class MovementController
 {
-    
+
     private readonly RoomController roomController;
     private readonly RoomData roomData;
     private readonly Game game;
@@ -15,7 +15,18 @@ public class MovementController
         roomData = game._RoomData;
     }
     
-    public ConsoleKey StateDirections(Room currentRoom)
+    public void HandleMovement(Room currentRoom)
+    {
+        var pressedKey = StateDirections(currentRoom);
+        if (pressedKey == ConsoleKey.Q)
+        {
+            game.Playing = false;
+            return;
+        }
+        Move(pressedKey);
+    }
+    
+    private ConsoleKey StateDirections(Room currentRoom)
     {
         //Console.Clear();
         Console.WriteLine("\nYou can move in the following directions in this room:\n");
@@ -88,7 +99,9 @@ public class MovementController
         //return pressedKeyInfo.Key;
     }
 
-    public void Move(ConsoleKey pressedKey)
+    
+
+    private void Move(ConsoleKey pressedKey)
     {
         var moveToRoom = pressedKey switch
         {
