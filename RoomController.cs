@@ -42,27 +42,10 @@ public class RoomController
         CurrentRoom.OnRoomExited();
     }
 
-    //public void HandleRoomCombat()
-    //{
-    //    Enemy? enemy = enemyData.GetEnemyByRoomId(CurrentRoom.RoomId);
-    //    if (enemy == null)
-    //    {
-    //        return;
-    //    }
-    //    CurrentRoom.HandleCombat(enemy);
-    //}
-
     public void HandleRoomItems()
     {
         //
     }
-    
-    
-
-    //public void PlayDialogue()
-    //{
-     //   CurrentRoom.PlayDialogues();
-    //}
 
    
     

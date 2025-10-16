@@ -28,14 +28,6 @@ public class Room
         PlayExitDialogues();
     }
 
-    //public void HandleCombat(Enemy enemy)
-    //{
-    //    Console.Clear();
-    //    string msg = $"You gonna fight {enemy.EnemyName}!\n{enemy.FlavorText}";
-    //    miscTools.RevealText(msg, 2);
-    //    miscTools.PressKeyToContinue();
-    //}
-
     public void HandleRoomItems()
     {
         //
