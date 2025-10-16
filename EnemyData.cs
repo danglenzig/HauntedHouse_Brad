@@ -33,7 +33,7 @@ public class EnemyData
         enemies.Add(ensignAbernathy);
         
         var technicianRourke = new Enemy.EnemyBuilder()
-            .AddEnemyName("Technicial Rourke")
+            .AddEnemyName("Technician Rourke")
             .AddRoomId("MessHall")
             .AddHealth(30)
             .AddAttackDamage(10)
