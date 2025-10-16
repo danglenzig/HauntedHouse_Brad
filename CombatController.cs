@@ -7,11 +7,11 @@ public class CombatController
     private MiscTools miscTools;
     private EnemyData enemyData;
     
-    public CombatController(Game _game, EnemyData _enemyData)
+    public CombatController(Game _game)
     {
         game = _game;
         miscTools = new MiscTools();
-        enemyData = _enemyData;
+        enemyData = game._EnemyData;
 
     }
 

@@ -12,15 +12,16 @@ public class Room
     
     private List<string> OnExitDialogues = new ();
     private List<string> OnEnterDialogues = new();
+    private List<string> OnEnterGameStateMessages = new();
     private MiscTools miscTools;
-
+    private Game game;
     public void OnRoomEntered()
     {
+        foreach (string message in OnEnterGameStateMessages)
+        {
+            game._GameData.SendMessage(message);
+        }
         PlayOnEnterDialogues();
-        //if (enemyData.GetEnemyByRoomId(RoomId) != null)
-        //{
-        //    Enemy enemy = enemyData.GetEnemyByRoomId(RoomId);
-        //}
     }
 
     public void OnRoomExited()
@@ -101,8 +102,19 @@ public class Room
             room.miscTools =  new MiscTools();
             return this;
         }
-        
 
+        public RoomBuilder AddOnEnterGameStateMessage(string message)
+        {
+            room.OnEnterGameStateMessages.Add(message);
+            return this;
+        }
+
+        public RoomBuilder AddGameReference(Game _game)
+        {
+            room.game = _game;
+            return this;
+        }
+        
         public Room Build()
         {
             return room;

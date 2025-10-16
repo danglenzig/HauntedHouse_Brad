@@ -11,6 +11,7 @@ public class RoomController
 
     private Game game;
     private EnemyData enemyData;
+    private GameData gameData;
     private RoomData roomData;
     private List<string> roomIds;
 
@@ -18,6 +19,7 @@ public class RoomController
     public RoomController(Game _game)
     {
         game = _game;
+        gameData = game._GameData;
 
         enemyData = game._EnemyData;
         roomData = game._RoomData;

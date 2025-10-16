@@ -19,7 +19,8 @@ public class Enemy
     private const int maxAttackDamage = 30;
     private const int maxBlockStrength = 30;
 
-
+    private List<string> OnEnemyDefeatedMessages = new();
+    private Game game;
     private string flavorText;
     
     private MiscTools miscTools;
@@ -142,6 +143,14 @@ public class Enemy
         //
     }
 
+    public void Die()
+    {
+        foreach (string message in OnEnemyDefeatedMessages)
+        {
+            game._GameData.SendMessage(message);
+        }
+    }
+
     public class EnemyBuilder
     {
         private Enemy enemy = new ();
@@ -169,6 +178,18 @@ public class Enemy
         public EnemyBuilder AddBlockStrength(int _blockStrength)
         {
             enemy.BlockStrength= _blockStrength;
+            return this;
+        }
+
+        public EnemyBuilder AddOnEnemyDefeatedMessage(string message)
+        {
+            enemy.OnEnemyDefeatedMessages.Add(message);
+            return this;
+        }
+        
+        public EnemyBuilder AddGameReference(Game _game)
+        {
+            enemy.game = _game;
             return this;
         }
 

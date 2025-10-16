@@ -4,14 +4,11 @@ public class RoomData
 {
     
     private Dictionary<string, Room> rooms = new();
+    private Game game;
 
-    //public Dictionary<string, Room> Rooms
-    //{
-    //    get => rooms;
-    //}
-    
-    public RoomData()
+    public RoomData(Game _game)
     {
+        game = _game;
         CreateRooms();
     }
 
@@ -26,14 +23,13 @@ public class RoomData
             .AddRoomId("Airlock")
             .AddDisplayName("the airlock")
             .AddRoomOrientation(false)
-            
+            .AddOnEnterGameStateMessage("TEST_MESSAGE")
             .AddOnEnterDialogue("You step into the airlock. The walls are scuffed with suit scratches, and a faint mist of\ncondensation drifts in the cold air.")
             .AddOnEnterDialogue("The silence feels wrong")
-            
-            .AddOnExitDialogue("Let's go...")
-            
+            .AddOnExitDialogue("The shipside hatch is infront of you. There's only one way to go here. Let's see\nwhat horrors await on the DSS Calliope...")
             .AddAdjacentRoom(Directions.Up, "CentralCorridor")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("Airlock", airlock);
 
@@ -41,16 +37,15 @@ public class RoomData
             .AddRoomId("CentralCorridor")
             .AddDisplayName("the central corridor")
             .AddRoomOrientation(false)
-            
             .AddOnEnterDialogue("A wide passageway lined with darkened display panels and flickering overhead lights.\nScattered crates make it easy for something to hide.")
-            
-            .AddOnExitDialogue("You are now leaving the central corridor.")
-            
+            .AddOnExitDialogue("The ship's emergency lighting is dim. It's hard to see more than a few meters, but you\nknow your way around the station")
+            .AddOnExitDialogue("The bridge is ahead of you to the north. The crew's living areas are to the east, and the\nscience wing is to the west.")
             .AddAdjacentRoom(Directions.Down, "Airlock")
             .AddAdjacentRoom(Directions.Right, "CrewQuarters")
             .AddAdjacentRoom(Directions.Up, "Bridge")
             .AddAdjacentRoom(Directions.Left, "MedicalBay")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("CentralCorridor", centralCorridor);
 
@@ -58,15 +53,13 @@ public class RoomData
             .AddRoomId("Bridge")
             .AddDisplayName("the bridge")
             .AddRoomOrientation(false)
-            
             .AddOnEnterDialogue("The ship’s nerve center. The captain’s chair is empty, the consoles dead except for a faint\nblinking error on the navigation system.")
-            
-            .AddOnExitDialogue("You are now leaving the bridge")
-            
+            .AddOnExitDialogue("The turbolift down to Main Engineering is to the north. The observation deck is to the\neast. The central corridor is to the south.")
             .AddAdjacentRoom(Directions.Up, "Turbolift")
             .AddAdjacentRoom(Directions.Right, "ObservationDeck")
             .AddAdjacentRoom(Directions.Down, "CentralCorridor")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("Bridge", bridge);
 
@@ -74,14 +67,12 @@ public class RoomData
             .AddRoomId("ObservationDeck")
             .AddDisplayName("the observation deck")
             .AddRoomOrientation(false)
-            
             .AddOnEnterDialogue("A glass dome opens to the black infinity of space.")
             .AddOnEnterDialogue("Streaks of blood smear across the viewport as though someone was dragged.")
-            
-            .AddOnExitDialogue("You are now leaving the observation deck.")
-            
+            .AddOnExitDialogue("This room is a dead end. The only way out is via the bridge, back the way you came")
             .AddAdjacentRoom(Directions.Left, "Bridge")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("ObservationDeck", observationDeck);
 
@@ -89,14 +80,12 @@ public class RoomData
             .AddRoomId("Turbolift")
             .AddDisplayName("the turbolift")
             .AddRoomOrientation(true)
-            
             .AddOnEnterDialogue("You're in the ship's central turbolift. It has two buttons: UP and DOWN")
-            
-            .AddOnExitDialogue("Press a button")
-            
+            .AddOnExitDialogue("Main Engineering is on the lower level. The bridge is on the upper level. Press a button.")
             .AddAdjacentRoom(Directions.Up, "Bridge")
             .AddAdjacentRoom(Directions.Down, "Engineering")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("Turbolift", turbolift);
 
@@ -104,17 +93,13 @@ public class RoomData
             .AddRoomId("CrewQuarters")
             .AddDisplayName("crew quarters")
             .AddRoomOrientation(false)
-            
-            
             .AddOnEnterDialogue("Narrow bunks, personal effects scattered everywhere. Some metal lockers hang open,")
             .AddOnEnterDialogue("...others are bowed outward, as if clawed from the inside.")
-            
-            .AddOnExitDialogue("You are now leaving the crew quarters.")
-            
-            
+            .AddOnExitDialogue("The central corridor is to the west. The mess hall is to the east.")
             .AddAdjacentRoom(Directions.Left, "CentralCorridor")
             .AddAdjacentRoom(Directions.Right, "MessHall")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("CrewQuarters", crewQuarters);
 
@@ -122,14 +107,12 @@ public class RoomData
             .AddRoomId("MessHall")
             .AddDisplayName("the mess hall")
             .AddRoomOrientation(false)
-            
             .AddOnEnterDialogue("A wide room with overturned tables and trays. The smell of rot mixes with burned food.")
             .AddOnEnterDialogue("A ceiling vent rattles as though something’s crawling inside")
-            
-            .AddOnExitDialogue("You are now leaving the kitchen.")
-            
+            .AddOnExitDialogue("This room is a dead end. The only way out is via the crew quarters, back the way you came.")
             .AddAdjacentRoom(Directions.Left, "CrewQuarters")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("MessHall", messHall);
 
@@ -137,15 +120,13 @@ public class RoomData
             .AddRoomId("MedicalBay")
             .AddDisplayName("the medical bay")
             .AddRoomOrientation(false)
-            
             .AddOnEnterDialogue("Bright white tiles stained brown. Several operating beds hold motionless crew,\ntheir chests oddly swollen.")
             .AddOnEnterDialogue("Surgical tools are scattered everywhere")
-            
-            .AddOnExitDialogue("You are leaving the medical bay.")
-            
+            .AddOnExitDialogue("The central corridor is to the east. The specimen lab is to the north.")
             .AddAdjacentRoom(Directions.Right, "CentralCorridor")
             .AddAdjacentRoom(Directions.Up, "SpecimenLab")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("MedicalBay", medicalBay);
 
@@ -153,14 +134,13 @@ public class RoomData
             .AddRoomId("SpecimenLab")
             .AddDisplayName("the specimen lab")
             .AddRoomOrientation(false)
-            
             .AddOnEnterDialogue("Glass tubes line the walls, most shattered. Strange organic growths spread across the floor.")
             .AddOnEnterDialogue("Whatever research was done here, it got out of control.")
-            
-            .AddOnExitDialogue("You are now leaving the specimen lab.")
+            .AddOnExitDialogue("This room is a dead end. The only way out is back the way you came, via the medical bay.")
             
             .AddAdjacentRoom(Directions.Down, "MedicalBay")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("SpecimenLab", specimenLab);
 
@@ -168,15 +148,13 @@ public class RoomData
             .AddRoomId("Engineering")
             .AddDisplayName("main engineering")
             .AddRoomOrientation(false)
-            
             .AddOnEnterDialogue("The loud hum of the ship’s reactor is now only a faint irregular throb.")
             .AddOnEnterDialogue("Exposed pipes vent steam, and the room shudders occasionally as if alive.")
-            
-            .AddOnExitDialogue("You are now leaving main engineering.")
-            
+            .AddOnExitDialogue("The turbolift is to the east. The cargo bay is to the south.")
             .AddAdjacentRoom(Directions.Right, "Turbolift")
             .AddAdjacentRoom(Directions.Down, "CargoBay")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("Engineering", engineering);
 
@@ -184,13 +162,11 @@ public class RoomData
             .AddRoomId("CargoBay")
             .AddDisplayName("the cargo bay")
             .AddRoomOrientation(false)
-            
-            .AddOnEnterDialogue("This is the cargo bay.")
-            
-            .AddOnExitDialogue("You are now leaving the cargo bay.")
-            
+            .AddOnEnterDialogue("This is the cargo bay. Blah blah blah.")
+            .AddOnExitDialogue("This room is a dead end. The only way out is back the way you came, via Main Engineering.")
             .AddAdjacentRoom(Directions.Up, "Engineering")
             .AddMiscTools()
+            .AddGameReference(game)
             .Build();
         rooms.Add("CargoBay", cargoBay);
     }

@@ -8,6 +8,7 @@ public class Game
     
     private RoomData _roomData;
     private EnemyData _enemyData;
+    private GameData _gameData;
     private MovementController movementController;
     private RoomController roomController;
     private CombatController combatController;
@@ -40,6 +41,11 @@ public class Game
         get => _enemyData;
     }
 
+    public GameData _GameData
+    {
+        get => _gameData;
+    }
+
     public RoomController _RoomController
     {
         get => roomController;
@@ -64,7 +70,6 @@ public class Game
             //roomController.HandleRoomItems(); //TODO
             roomController.OnRoomExit();
             movementController.HandleMovement(roomController.CurrentRoom);
-            // movementController will set playing = false if Q is pressed, otherwise it ingests the arrow keys
         }
     }
 
@@ -78,12 +83,12 @@ public class Game
     {
         miscTools = new MiscTools();
         _Player = new Player(this, 100, 10, 5, 5);
-        _roomData = new RoomData();
-        _enemyData = new EnemyData();
+        _roomData = new RoomData(this);
+        _enemyData = new EnemyData(this);
+        _gameData = new GameData();
 
         roomController = new RoomController(this);
-        combatController = new CombatController(this, _enemyData);
-        //roomController = new RoomController(_roomData, _enemyData);
+        combatController = new CombatController(this);
         movementController = new MovementController(this);
     }
 }

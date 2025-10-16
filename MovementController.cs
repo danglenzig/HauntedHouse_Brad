@@ -18,11 +18,11 @@ public class MovementController
     public void HandleMovement(Room currentRoom)
     {
         var pressedKey = StateDirections(currentRoom);
-        if (pressedKey == ConsoleKey.Q)
-        {
-            game.Playing = false;
-            return;
-        }
+        //if (pressedKey == ConsoleKey.Q)
+        //{
+        //    game.Playing = false;
+        //    return;
+        //}
         Move(pressedKey);
     }
     
@@ -67,11 +67,11 @@ public class MovementController
                         break;
                     case Directions.Left:
                         //promtString = "˂";
-                        directionString = $"East to {displayName}";
+                        directionString = $"West to {displayName}";
                         break;
                     case Directions.Right:
                         //promtString = "\t˃";
-                        directionString = $"West to {displayName}";
+                        directionString = $"East to {displayName}";
                         break;
                 }
             }
