@@ -141,8 +141,9 @@ public class Player
         //
     }
 
-    private void Die()
+    public void Die()
     {
         game.OnPlayerDied();
     }
+    
 }

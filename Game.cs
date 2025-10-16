@@ -58,14 +58,12 @@ public class Game
             roomController.OnRoomExit();
             movementController.HandleMovement(roomController.CurrentRoom); // <-- will set playing = false if Q is pressed, otherwise it ingests the arrow keys
         }
-        
     }
 
     public void OnPlayerDied()
     {
         Console.WriteLine("YOU DEAD");
         playing = false;
-        return;
     }
     
     private void CreateDependencies()
