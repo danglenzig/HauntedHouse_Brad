@@ -10,10 +10,17 @@ public class Game
     private EnemyData _enemyData;
     private MovementController movementController;
     private RoomController roomController;
+    private CombatController combatController;
     private Player player;
     private MiscTools miscTools;
-    
     private bool playing;
+
+    public Player _Player
+    {
+        get => player;
+        private set => player = value;
+    }
+    
     public bool Playing
     {
         get=> playing;
@@ -53,10 +60,11 @@ public class Game
         while (playing)
         {
             roomController.OnRoomEnter();
-            roomController.HandleRoomCombat();
+            combatController.HandleCombat(roomController.CurrentRoom.RoomId);
             //roomController.HandleRoomItems(); //TODO
             roomController.OnRoomExit();
-            movementController.HandleMovement(roomController.CurrentRoom); // <-- will set playing = false if Q is pressed, otherwise it ingests the arrow keys
+            movementController.HandleMovement(roomController.CurrentRoom);
+            // movementController will set playing = false if Q is pressed, otherwise it ingests the arrow keys
         }
     }
 
@@ -68,18 +76,14 @@ public class Game
     
     private void CreateDependencies()
     {
-     
         miscTools = new MiscTools();
-        player = new Player(this, 100, 10, 5, 5);
+        _Player = new Player(this, 100, 10, 5, 5);
         _roomData = new RoomData();
         _enemyData = new EnemyData();
 
         roomController = new RoomController(this);
+        combatController = new CombatController(this, _enemyData);
         //roomController = new RoomController(_roomData, _enemyData);
         movementController = new MovementController(this);
-        
     }
-    
-    
-    
 }
