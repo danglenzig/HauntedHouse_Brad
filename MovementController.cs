@@ -17,8 +17,8 @@ public class MovementController
     
     public ConsoleKey StateDirections(Room currentRoom)
     {
-        Console.Clear();
-        Console.WriteLine("You can move in the following directions in this room:\n");
+        //Console.Clear();
+        Console.WriteLine("\nYou can move in the following directions in this room:\n");
 
         foreach (var adjacentRoom in currentRoom.AdjacentRooms)
         {

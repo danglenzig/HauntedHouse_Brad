@@ -8,69 +8,62 @@ public class Room
     public string RoomId;
     public string DisplayName;
     public bool IsVertical;
-    //public bool alreadySeen = false;
-    public List<string> Dialogues = new ();
     public Dictionary<Directions, string> AdjacentRooms = new ();
-
-
-    public void OnRoomEntered(EnemyData enemyData)
-    {
-        
-        // - check if there's an enemy in this room
-        // - if so, check its health (is it dead)
-        // - if not, fight it (HandleCombat(), below)
-        //     - during the give the player an option to retreat the way they came
-        //     - TODO: how do we know what room they came from?
-        // - Kill the enemy or die
-
-        if (enemyData.GetEnemyByRoomId(RoomId) != null)
-        {
-            Enemy enemy = enemyData.GetEnemyByRoomId(RoomId);
-            HandleCombat(enemy);
-        }
-        PlayLongDialogues();
-        
-        
-        
-        
-    }
     
-    public void PlayLongDialogues()
-    {
-        foreach (string dialogue in Dialogues)
-        {
-            Console.Clear();
-            foreach (var character in dialogue)
-            {
-                Console.Write(character);
-                Thread.Sleep(2);
-            }
+    private List<string> OnExitDialogues = new ();
+    private List<string> OnEnterDialogues = new();
+    private MiscTools miscTools;
 
-            Console.WriteLine("\n\nPress any key to continue..");
-            Console.ReadKey();
-        }
+    public void OnRoomEntered()
+    {
+        PlayOnEnterDialogues();
+        //if (enemyData.GetEnemyByRoomId(RoomId) != null)
+        //{
+        //    Enemy enemy = enemyData.GetEnemyByRoomId(RoomId);
+        //}
+    }
+
+    public void OnRoomExited()
+    {
+        PlayExitDialogues();
     }
 
     public void HandleCombat(Enemy enemy)
     {
-        //Enemy enemy = enemyData.GetEnemyByRoomId(RoomId);
         Console.Clear();
         string msg = $"You gonna fight {enemy.EnemyName}!\n{enemy.FlavorText}";
-        foreach (var character in msg)
+        miscTools.RevealText(msg, 2);
+        miscTools.PressKeyToContinue();
+    }
+
+    public void HandleRoomItems()
+    {
+        //
+    }
+
+    private void PlayExitDialogues()
+    {
+        Console.Clear();
+        foreach (string dialogue in OnExitDialogues)
         {
-            Console.Write(character);
-            Thread.Sleep(2);
+            Console.Clear();
+            miscTools.RevealText(dialogue, 2);
+            miscTools.PressKeyToContinue();
         }
-        
-        Console.WriteLine("\n\nPress any key to continue..");
-        Console.ReadKey();
-        
-        //TODO: handle combat
-        // if the enemy is dead, make a comment and move on 
+    }
+    
+    private void PlayOnEnterDialogues()
+    {
+        Console.Clear();
+        foreach (string dialogue in OnEnterDialogues)
+        {
+            Console.Clear();
+            miscTools.RevealText(dialogue, 2);
+            miscTools.PressKeyToContinue();
+        }
     }
     
     
-
     public class RoomBuilder
     {
         private Room room = new ();
@@ -81,9 +74,15 @@ public class Room
             return this;
         }
 
-        public RoomBuilder AddDialogue(string dialogue)
+        public RoomBuilder AddOnExitDialogue(string dialogue)
         {
-            room.Dialogues.Add(dialogue);
+            room.OnExitDialogues.Add(dialogue);
+            return this;
+        }
+
+        public RoomBuilder AddOnEnterDialogue(string dialogue)
+        {
+            room.OnEnterDialogues.Add(dialogue);
             return this;
         }
 
@@ -104,6 +103,12 @@ public class Room
             room.DisplayName = displayName;
             return this;
         }
+
+        public RoomBuilder AddMiscTools()
+        {
+            room.miscTools =  new MiscTools();
+            return this;
+        }
         
 
         public Room Build()
@@ -111,5 +116,4 @@ public class Room
             return room;
         }
     }
-    
 }

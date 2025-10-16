@@ -45,14 +45,15 @@ public class Game
         while (playing)
         {
             roomController.OnRoomEnter();
+            roomController.HandleRoomCombat();
+            //roomController.HandleRoomItems();
+            roomController.OnRoomExit();
             
             
-            
-            //roomController.PlayDialogue();
             var pressedKey = movementController.StateDirections(roomController.CurrentRoom);
             if (pressedKey == ConsoleKey.Q)
             {
-                playing = false;
+               playing = false;
                 return;
             }
             movementController.Move(pressedKey);

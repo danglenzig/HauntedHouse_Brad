@@ -16,6 +16,7 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddMiscTools()
             .Build();
         corporalSaito.SetFlavorText("Saito's flavor text");
         enemies.Add(corporalSaito);
@@ -26,6 +27,7 @@ public class EnemyData
             .AddHealth(20)
             .AddAttackDamage(1)
             .AddBlockStrength(1)
+            .AddMiscTools()
             .Build();
         ensignAbernathy.SetFlavorText("Abernathy's flavor text");
         enemies.Add(ensignAbernathy);
@@ -36,6 +38,7 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddMiscTools()
             .Build();
         technicianRourke.SetFlavorText("Rourk's flavor text");
         enemies.Add(technicianRourke);
@@ -46,6 +49,7 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddMiscTools()
             .Build();
         doctorHalberg.SetFlavorText("Halberg's flavor text");
         enemies.Add(doctorHalberg);
@@ -56,6 +60,7 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddMiscTools()
             .Build();
         commanderVale.SetFlavorText("Vale's flavor text");
         enemies.Add(commanderVale);
@@ -66,6 +71,7 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddMiscTools()
             .Build();
         chiefMalik.SetFlavorText("Malik's flavor text");
         enemies.Add(chiefMalik);
@@ -76,6 +82,7 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddMiscTools()
             .Build();
         captainWilson.SetFlavorText("Wilsons's flavor text");
         enemies.Add(captainWilson);

@@ -21,6 +21,8 @@ public class Enemy
 
 
     private string flavorText;
+    
+    private MiscTools miscTools;
 
     public string FlavorText
     {
@@ -167,6 +169,12 @@ public class Enemy
         public EnemyBuilder AddBlockStrength(int _blockStrength)
         {
             enemy.BlockStrength= _blockStrength;
+            return this;
+        }
+
+        public EnemyBuilder AddMiscTools()
+        {
+            enemy.miscTools = new MiscTools();
             return this;
         }
         public Enemy Build()

@@ -34,8 +34,30 @@ public class RoomController
 
     public void OnRoomEnter()
     {
-        CurrentRoom.OnRoomEntered(enemyData);
+        CurrentRoom.OnRoomEntered();
     }
+
+    public void OnRoomExit()
+    {
+        CurrentRoom.OnRoomExited();
+    }
+
+    public void HandleRoomCombat()
+    {
+        Enemy? enemy = enemyData.GetEnemyByRoomId(CurrentRoom.RoomId);
+        if (enemy == null)
+        {
+            return;
+        }
+        CurrentRoom.HandleCombat(enemy);
+    }
+
+    public void HandleRoomItems()
+    {
+        //
+    }
+    
+    
 
     //public void PlayDialogue()
     //{
