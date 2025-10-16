@@ -11,6 +11,7 @@ public class Game
     private MovementController movementController;
     private RoomController roomController;
     private Player player;
+    private MiscTools miscTools;
     
     private bool playing;
     public bool Playing
@@ -45,11 +46,9 @@ public class Game
 
     public void Run()
     {
-        
-        Console.WriteLine("Welcome to the SS Calliope!");
-        Console.WriteLine("\n\nPress any key to continue..");
-        Console.ReadKey();
         // TODO: opening narration
+        Console.WriteLine("Welcome to the SS Calliope!");
+        miscTools.PressKeyToContinue();
         
         while (playing)
         {
@@ -71,7 +70,8 @@ public class Game
     
     private void CreateDependencies()
     {
-        
+     
+        miscTools = new MiscTools();
         player = new Player(this, 100, 10, 5, 5);
         _roomData = new RoomData();
         _enemyData = new EnemyData();
