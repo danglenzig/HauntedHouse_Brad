@@ -44,6 +44,7 @@ public class RoomData
             .AddAdjacentRoom(Directions.Right, "CrewQuarters")
             .AddAdjacentRoom(Directions.Up, "Bridge")
             .AddAdjacentRoom(Directions.Left, "MedicalBay")
+            .AddOnEnterGameStateMessage("FOUND_FLASHLIGHT")
             .AddMiscTools()
             .AddGameReference(game)
             .Build();

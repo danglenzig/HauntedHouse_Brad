@@ -25,6 +25,12 @@ public class CombatController
         Player player = game._Player;
         Console.Clear();
         string msg = $"You gonna fight {enemy.EnemyName}!\n{enemy.FlavorText}";
+        
+        
+        // fighting happens (?)
+        
+        
+        
         miscTools.RevealText(msg, 2);
         miscTools.PressKeyToContinue();
     }

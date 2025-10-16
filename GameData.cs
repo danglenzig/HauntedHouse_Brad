@@ -9,6 +9,7 @@ public class GameData
     }
     
     private bool testMessageReceived = false;
+    private bool foundTheFlashlight = false;
 
     public void SendMessage(string message)
     {
@@ -19,6 +20,10 @@ public class GameData
                 {
                     testMessageReceived = true;
                 }
+                break;
+            case "FOUND_FLASHLIGHT":
+                // do stuff
+                foundTheFlashlight = true;
                 break;
             // ...and so on
         }

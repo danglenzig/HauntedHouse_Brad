@@ -86,7 +86,6 @@ public class Game
         _roomData = new RoomData(this);
         _enemyData = new EnemyData(this);
         _gameData = new GameData();
-
         roomController = new RoomController(this);
         combatController = new CombatController(this);
         movementController = new MovementController(this);
