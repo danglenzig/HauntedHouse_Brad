@@ -5,11 +5,14 @@ public class MovementController
     
     private readonly RoomController roomController;
     private readonly RoomData roomData;
+    private readonly Game game;
 
-    public MovementController(RoomController roomController, RoomData roomData)
+    //public MovementController(RoomController roomController, RoomData roomData)
+    public MovementController(Game _game)
     {
-        this.roomController = roomController;
-        this.roomData = roomData;
+        game = _game;
+        roomController = game._RoomController;
+        roomData = game._RoomData;
     }
     
     public ConsoleKey StateDirections(Room currentRoom)
@@ -21,7 +24,7 @@ public class MovementController
         {
             string displayName = roomData.GetDisplayNameFromId(adjacentRoom.Value);
             string directionString = "";
-
+            //string promtString = "";
             
             
             bool roomIsVertical = currentRoom.IsVertical;
@@ -30,9 +33,11 @@ public class MovementController
                 switch (adjacentRoom.Key)
                 {
                     case Directions.Up:
+                        //promtString = "˄";
                         directionString = $"Up to {displayName}";
                         break;
                     case Directions.Down:
+                        //promtString = "˅";
                         directionString = $"Down to {displayName}";
                         break;
                 }
@@ -42,29 +47,45 @@ public class MovementController
                 switch (adjacentRoom.Key)
                 {
                     case Directions.Up:
+                        //promtString = "˄";
                         directionString = $"North to {displayName}";
                         break;
                     case Directions.Down:
+                        //promtString = "˅";
                         directionString = $"South to {displayName}";
                         break;
                     case Directions.Left:
+                        //promtString = "˂";
                         directionString = $"East to {displayName}";
                         break;
                     case Directions.Right:
+                        //promtString = "\t˃";
                         directionString = $"West to {displayName}";
                         break;
                 }
             }
             
-            
+            //Console.WriteLine($"\t- {promtString} : {directionString}");
             Console.WriteLine($"\t- {adjacentRoom.Key} : {directionString}");
         }
         
-        Console.WriteLine("\nPress any corresponding arrow keys to continue..\n");
         
-        ConsoleKeyInfo pressedKeyInfo = Console.ReadKey();
+
+        ConsoleKeyInfo _pressedKeyInfo = new ConsoleKeyInfo();
+        bool keyIsValid = false;
+
+        while (!keyIsValid)
+        {
+            Console.WriteLine("\nPress any corresponding arrow keys to continue..\n");
+            _pressedKeyInfo = Console.ReadKey();
+            keyIsValid = (_pressedKeyInfo.Key == ConsoleKey.LeftArrow  || _pressedKeyInfo.Key == ConsoleKey.RightArrow || _pressedKeyInfo.Key == ConsoleKey.UpArrow  || _pressedKeyInfo.Key == ConsoleKey.DownArrow);
+        }
         
-        return pressedKeyInfo.Key;
+        return _pressedKeyInfo.Key;
+        
+        //Console.WriteLine("\nPress any corresponding arrow keys to continue..\n");
+        //ConsoleKeyInfo pressedKeyInfo = Console.ReadKey();
+        //return pressedKeyInfo.Key;
     }
 
     public void Move(ConsoleKey pressedKey)
