@@ -65,14 +65,14 @@ public class Game
         miscTools.RevealText(StoryData.GameIntro, 2);
         miscTools.PressKeyToContinue();
 
-        /*while (playing)
+        while (playing)
         {
             roomController.OnRoomEnter();
             combatController.HandleCombat(roomController.CurrentRoom.RoomId);
             //roomController.HandleRoomItems();//TODO:
             roomController.OnRoomExit();
             movementController.HandleMovement(roomController.CurrentRoom);
-        }*/
+        }
     }
 
     public void OnPlayerDied()
