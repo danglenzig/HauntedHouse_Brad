@@ -3,6 +3,8 @@
 public class Player
 {
     
+    //public const int MAX_HEALTH = 100;
+    
     public Player(Game _game, int _startHealth, int _startAttackDamage, int _startHealAmount, int _startBlockStrength)
     {
         game = _game;
@@ -116,6 +118,17 @@ public class Player
         }
     }
 
+    private string name = "Namey Nameson";
+
+    public string Name
+    {
+        get => name;
+        set
+        {
+            name = value;
+        }
+    }
+
     public void Attack(Enemy enemy)
     {
         //
@@ -136,10 +149,10 @@ public class Player
         //
     }
 
-    public void Retreat()
-    {
-        //
-    }
+    //public void Retreat()
+    //{
+    //    //
+    //}
 
     public void Die()
     {
