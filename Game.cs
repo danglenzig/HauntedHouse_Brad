@@ -89,5 +89,7 @@ public class Game
         roomController = new RoomController(this);
         combatController = new CombatController(this);
         movementController = new MovementController(this);
+        
+        _Player.Health = 100;
     }
 }

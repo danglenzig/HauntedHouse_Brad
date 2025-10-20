@@ -40,7 +40,7 @@ public class Room
         foreach (string dialogue in OnExitDialogues)
         {
             Console.Clear();
-            miscTools.RevealText(dialogue, 2);
+            miscTools.RevealText(dialogue, 20);
             miscTools.PressKeyToContinue();
         }
     }
@@ -51,7 +51,7 @@ public class Room
         foreach (string dialogue in OnEnterDialogues)
         {
             Console.Clear();
-            miscTools.RevealText(dialogue, 2);
+            miscTools.RevealText(dialogue, 20);
             miscTools.PressKeyToContinue();
         }
     }

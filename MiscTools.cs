@@ -6,6 +6,8 @@ public class MiscTools
     {
         
     }
+    
+    //public int REVEAL_INTERVAL = 20;
 
     public void RevealText(string text, int revealInterval)
     {
