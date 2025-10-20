@@ -18,17 +18,30 @@ public class Enemy
     //private const int maxHealAmount = 30;
     private const int maxAttackDamage = 30;
     private const int maxBlockStrength = 30;
+    
 
     private List<string> OnEnemyDefeatedMessages = new();
     private Game game;
-    private string flavorText;
     
     private MiscTools miscTools;
-
+    
+    
+    private bool isDead = false;
+    public bool IsDead { get => isDead; set => isDead = value; }
+    
+    private string flavorText;
     public string FlavorText
     {
         get => flavorText;
         private set => flavorText = value;
+    }
+
+    private string onDieText;
+
+    public string OnDieText
+    {
+        get => onDieText;
+        private set => onDieText = value;
     }
 
     private string roomId;
@@ -38,6 +51,9 @@ public class Enemy
         get => roomId;
         private set => roomId = value;
     }
+
+    private int aggro = 75;
+    public int Aggro { get => aggro; set => aggro = value; }
     
     private string enemyName;
     public string EnemyName;
@@ -48,9 +64,10 @@ public class Enemy
         get => health;
         set
         {
-            if (value < 0)
+            if (value <= 0)
             {
                 health = 0;
+                IsDead = true;
             }
             else if (value > maxHealth)
             {
@@ -190,6 +207,18 @@ public class Enemy
         public EnemyBuilder AddGameReference(Game _game)
         {
             enemy.game = _game;
+            return this;
+        }
+
+        public EnemyBuilder AddAggro(int _aggressiveness)
+        {
+            enemy.Aggro = _aggressiveness;
+            return this;
+        }
+
+        public EnemyBuilder AddOnDieText(string _onDieText)
+        {
+            enemy.OnDieText = _onDieText;
             return this;
         }
 

@@ -1,7 +1,11 @@
-﻿namespace HauntedHouse;
+﻿using System.Runtime.CompilerServices;
+using HauntedHouse;
+
+namespace HauntedHouse;
 
 public class Game
 {
+    
     private RoomData _roomData;
     private EnemyData _enemyData;
     private GameData _gameData;
@@ -92,6 +96,7 @@ public class Game
         combatController = new CombatController(this);
         movementController = new MovementController(this);
         asciiMap = new AsciiMap(this);
+        _Player.Health = 100;
     }
 
     public void Output(string message)
