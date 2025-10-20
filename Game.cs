@@ -1,11 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-using HauntedHouse;
-
-namespace HauntedHouse;
+﻿namespace HauntedHouse;
 
 public class Game
 {
-    
     private RoomData _roomData;
     private EnemyData _enemyData;
     private GameData _gameData;
@@ -14,23 +10,24 @@ public class Game
     private CombatController combatController;
     private Player player;
     private MiscTools miscTools;
+
     private bool playing;
+
+    //public bool PowerRestored { get; set; } = false; // changed to GameData but managed in this script in: PowerRestored
+    private AsciiMap asciiMap;
 
     public Player _Player
     {
         get => player;
         private set => player = value;
     }
-    
+
     public bool Playing
     {
-        get=> playing;
-        set
-        {
-            playing = value;
-        }
+        get => playing;
+        set { playing = value; }
     }
-    
+
     public RoomData _RoomData
     {
         get => _roomData;
@@ -59,18 +56,23 @@ public class Game
 
     public void Run()
     {
-        // TODO: opening narration
-        Console.WriteLine("Welcome to the SS Calliope!");
+        asciiMap.DrawMap(_RoomController.CurrentRoom.RoomId);
         miscTools.PressKeyToContinue();
-        
-        while (playing)
+        Console.Clear();
+        miscTools.RevealText(StoryData.InitialIntro, 2);
+        miscTools.PressKeyToContinue();
+        Console.Clear();
+        miscTools.RevealText(StoryData.GameIntro, 2);
+        miscTools.PressKeyToContinue();
+
+        /*while (playing)
         {
             roomController.OnRoomEnter();
             combatController.HandleCombat(roomController.CurrentRoom.RoomId);
-            //roomController.HandleRoomItems(); //TODO
+            //roomController.HandleRoomItems();//TODO:
             roomController.OnRoomExit();
             movementController.HandleMovement(roomController.CurrentRoom);
-        }
+        }*/
     }
 
     public void OnPlayerDied()
@@ -78,7 +80,7 @@ public class Game
         Console.WriteLine("YOU DEAD");
         playing = false;
     }
-    
+
     private void CreateDependencies()
     {
         miscTools = new MiscTools();
@@ -89,5 +91,26 @@ public class Game
         roomController = new RoomController(this);
         combatController = new CombatController(this);
         movementController = new MovementController(this);
+        asciiMap = new AsciiMap(this);
+    }
+
+    public void Output(string message)
+    {
+        miscTools.RevealText(message, 2);
+        Console.WriteLine();
+    }
+
+    public void TriggerEnding(string endingText)
+    {
+        Console.Clear();
+        miscTools.RevealText(endingText, 2);
+        miscTools.PressKeyToContinue();
+        playing = false;
+    }
+
+    public bool PowerRestored
+    {
+        get => _gameData.PowerRestored;
+        set => _gameData.PowerRestored = value;
     }
 }

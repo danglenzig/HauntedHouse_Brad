@@ -10,6 +10,7 @@ public class GameData
     
     private bool testMessageReceived = false;
     private bool foundTheFlashlight = false;
+    public bool PowerRestored { get; set; } = false; 
 
     public void SendMessage(string message)
     {

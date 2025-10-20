@@ -19,6 +19,14 @@ public class Player
     private const int maxAttackDamage = 30;
     private const int maxBlockStrength = 30;
     
+    // === Narrative & inventory flags ===
+    public bool HasFlashlight { get; set; }
+    public bool HasKeycardLevel1 { get; set; } // 🔑 Level 1 keycard
+    public bool HasKeycardLevel2 { get; set; } // 🔑 Level 2 keycard
+    public bool HasMetHalberg { get; set; }
+    public bool HasPistol { get; set; }
+    public bool HasDataChip { get; set; }
+    
     private int health;
     public int Health
     {
@@ -121,14 +129,20 @@ public class Player
         //
     }
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(int amount)
     {
-        //
+        Health -= amount;
+        if (Health <= 0)
+        {
+            Health = 0;
+            game.OnPlayerDied();
+        }
     }
 
-    public void Heal()
+    public void Heal(int amount)
     {
-        //
+        Health += amount;
+        if (Health > 100) Health = 100;
     }
 
     public void Block()
