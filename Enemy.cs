@@ -36,6 +36,14 @@ public class Enemy
         private set => flavorText = value;
     }
 
+    private string onDieText;
+
+    public string OnDieText
+    {
+        get => onDieText;
+        private set => onDieText = value;
+    }
+
     private string roomId;
 
     public string RoomId
@@ -205,6 +213,12 @@ public class Enemy
         public EnemyBuilder AddAggro(int _aggressiveness)
         {
             enemy.Aggro = _aggressiveness;
+            return this;
+        }
+
+        public EnemyBuilder AddOnDieText(string _onDieText)
+        {
+            enemy.OnDieText = _onDieText;
             return this;
         }
 
