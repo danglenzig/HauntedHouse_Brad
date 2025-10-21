@@ -37,7 +37,11 @@ public class Objective
 
     public void CompleteObjective()
     {
-        //
+        foreach (Objective _obj in StartObjectivesOnCompleted)
+        {
+            _obj.ObjectiveState = EnumObjectiveState.STARTED;
+        }
+        ObjectiveState = EnumObjectiveState.COMPLETED;
     }
 
     private List<Objective> StartObjectivesOnCompleted = new List<Objective>();

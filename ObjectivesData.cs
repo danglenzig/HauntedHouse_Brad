@@ -56,4 +56,45 @@ public class ObjectivesData
         Console.WriteLine($"ERROR: Objective with ID {objID} not found. Returning null");
         return null;
     }
+    /*
+    public List<Objective>? GetStartedObjectives()
+    {
+        List<Objective> startedObjs = new List<Objective>();
+        foreach (Objective _obj in objectives)
+        {
+            if (_obj.ObjectiveState == EnumObjectiveState.STARTED)
+            {
+                startedObjs.Add(_obj);
+            }
+        }
+        if (startedObjs.Count > 0)
+        {
+            return startedObjs;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    */
+    
+    public List<Objective>? GetObjectivesByState(EnumObjectiveState _state)
+    {
+        List<Objective> objList = new List<Objective>();
+        foreach (Objective _obj in objectives)
+        {
+            if (_obj.ObjectiveState == _state)
+            {
+                objList.Add(_obj);
+            }
+        }
+        if (objList.Count > 0)
+        {
+            return objList;
+        }
+        else
+        {
+            return null;
+        }
+    }
 }
