@@ -9,6 +9,7 @@ public class Game
     private RoomData _roomData;
     private EnemyData _enemyData;
     private GameData _gameData;
+    private ObjectivesData _objectivesData;
     private MovementController movementController;
     private RoomController roomController;
     private CombatController combatController;
@@ -92,6 +93,7 @@ public class Game
         _roomData = new RoomData(this);
         _enemyData = new EnemyData(this);
         _gameData = new GameData();
+        _objectivesData = new ObjectivesData(this);
         roomController = new RoomController(this);
         combatController = new CombatController(this);
         movementController = new MovementController(this);
