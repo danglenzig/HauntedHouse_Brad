@@ -20,22 +20,28 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddAggro(75)
+            .AddFlavorText("<Text that appears before the fight with Saito>")
+            .AddOnDieText("<Text that appears when Saito dies>")
             .AddMiscTools()
              .AddGameReference(game)
             .Build();
-        corporalSaito.SetFlavorText("Saito's flavor text");
+        //corporalSaito.SetFlavorText("Saito's flavor text");
         enemies.Add(corporalSaito);
         
         var ensignAbernathy = new Enemy.EnemyBuilder()
             .AddEnemyName("Ensign Abernathy")
             .AddRoomId("CentralCorridor")
             .AddHealth(20)
-            .AddAttackDamage(1)
-            .AddBlockStrength(1)
+            .AddAttackDamage(5)
+            .AddBlockStrength(5)
+            .AddAggro(75)
+            .AddFlavorText("<Text that appears before the fight with Abernathy>")
+            .AddOnDieText("<Text that appears when Abernathy dies>")
             .AddMiscTools()
             .AddGameReference(game)
             .Build();
-        ensignAbernathy.SetFlavorText("Abernathy's flavor text");
+        //ensignAbernathy.SetFlavorText("Abernathy's flavor text");
         enemies.Add(ensignAbernathy);
         
         var technicianRourke = new Enemy.EnemyBuilder()
@@ -44,10 +50,13 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddAggro(75)
+            .AddFlavorText("<Text that appears before the fight with Rourke>")
+            .AddOnDieText("<Text that appears when Rourke dies>")
             .AddMiscTools()
             .AddGameReference(game)
             .Build();
-        technicianRourke.SetFlavorText("Rourk's flavor text");
+        //technicianRourke.SetFlavorText("Rourk's flavor text");
         enemies.Add(technicianRourke);
         
         var doctorHalberg = new Enemy.EnemyBuilder()
@@ -56,10 +65,13 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddAggro(75)
+            .AddFlavorText("<Text that appears before the fight with Halberg>")
+            .AddOnDieText("<Text that appears when Halberg dies>")
             .AddMiscTools()
             .AddGameReference(game)
             .Build();
-        doctorHalberg.SetFlavorText("Halberg's flavor text");
+        //doctorHalberg.SetFlavorText("Halberg's flavor text");
         enemies.Add(doctorHalberg);
         
         var commanderVale = new Enemy.EnemyBuilder()
@@ -68,10 +80,13 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddAggro(75)
+            .AddFlavorText("<Text that appears before the fight with Vale>")
+            .AddOnDieText("<Text that appears when Vale dies>")
             .AddMiscTools()
             .AddGameReference(game)
             .Build();
-        commanderVale.SetFlavorText("Vale's flavor text");
+        //commanderVale.SetFlavorText("Vale's flavor text");
         enemies.Add(commanderVale);
         
         var chiefMalik = new Enemy.EnemyBuilder()
@@ -80,10 +95,13 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddAggro(75)
+            .AddFlavorText("<Text that appears before the fight with Malik>")
+            .AddOnDieText("<Text that appears when Malik dies>")
             .AddMiscTools()
             .AddGameReference(game)
             .Build();
-        chiefMalik.SetFlavorText("Malik's flavor text");
+        //chiefMalik.SetFlavorText("Malik's flavor text");
         enemies.Add(chiefMalik);
         
         var captainWilson = new Enemy.EnemyBuilder()
@@ -92,10 +110,13 @@ public class EnemyData
             .AddHealth(30)
             .AddAttackDamage(10)
             .AddBlockStrength(5)
+            .AddAggro(75)
+            .AddFlavorText("<Text that appears before the fight with Wilson>")
+            .AddOnDieText("<Text that appears when Wilson dies>")
             .AddMiscTools()
             .AddGameReference(game)
             .Build();
-        captainWilson.SetFlavorText("Wilsons's flavor text");
+        //captainWilson.SetFlavorText("Wilsons's flavor text");
         enemies.Add(captainWilson);
     }
 

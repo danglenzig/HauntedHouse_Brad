@@ -6,13 +6,17 @@ public class MovementController
     private readonly RoomController roomController;
     private readonly RoomData roomData;
     private readonly Game game;
-
+    private readonly MiscTools miscTools;
+    
+    
     //public MovementController(RoomController roomController, RoomData roomData)
     public MovementController(Game _game)
     {
         game = _game;
         roomController = game._RoomController;
         roomData = game._RoomData;
+        miscTools = new MiscTools();
+
     }
     
     public void HandleMovement(Room currentRoom)
@@ -23,6 +27,14 @@ public class MovementController
         //    game.Playing = false;
         //    return;
         //}
+
+        if (pressedKey == ConsoleKey.O)
+        {
+            DisplayObjectives();
+            return;
+        }
+        
+        
         Move(pressedKey);
     }
     
@@ -95,13 +107,17 @@ public class MovementController
 
         while (!keyIsValid)
         {
-            Console.WriteLine("\nPress any corresponding arrow keys to continue..\n");
+            Console.WriteLine("\nPress O to view mission objectives.");
+            Console.WriteLine("Press any corresponding arrow keys to navigate...\n");
             _pressedKeyInfo = Console.ReadKey();
 
             keyIsValid = true;
             
-            if (!(_pressedKeyInfo.Key == ConsoleKey.LeftArrow || _pressedKeyInfo.Key == ConsoleKey.RightArrow ||
-                  _pressedKeyInfo.Key == ConsoleKey.UpArrow || _pressedKeyInfo.Key == ConsoleKey.DownArrow))
+            if (!(_pressedKeyInfo.Key == ConsoleKey.LeftArrow ||
+                  _pressedKeyInfo.Key == ConsoleKey.RightArrow ||
+                  _pressedKeyInfo.Key == ConsoleKey.UpArrow ||
+                  _pressedKeyInfo.Key == ConsoleKey.DownArrow || 
+                  _pressedKeyInfo.Key == ConsoleKey.O ))
             {
                 keyIsValid = false;
             }
@@ -146,7 +162,14 @@ public class MovementController
         //return pressedKeyInfo.Key;
     }
 
-    
+
+    private void DisplayObjectives()
+    {
+        Console.Clear();
+        game.Output("<Mission objectives shown here>");
+        miscTools.PressKeyToContinue();
+        HandleMovement(roomController.CurrentRoom);
+    }
 
     private void Move(ConsoleKey pressedKey)
     {

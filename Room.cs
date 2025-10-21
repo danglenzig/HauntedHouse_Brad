@@ -12,15 +12,15 @@ public class Room
     
     private List<string> OnExitDialogues = new ();
     private List<string> OnEnterDialogues = new();
-    private List<string> OnEnterGameStateMessages = new();
+    //private List<string> OnEnterGameStateMessages = new();
     private MiscTools miscTools;
     private Game game;
     public void OnRoomEntered()
     {
-        foreach (string message in OnEnterGameStateMessages)
-        {
-            game._GameData.SendMessage(message);
-        }
+        //foreach (string message in OnEnterGameStateMessages)
+        //{
+        //    game._GameData.SendMessage(message);
+        //}
         PlayOnEnterDialogues();
     }
 
@@ -103,11 +103,11 @@ public class Room
             return this;
         }
 
-        public RoomBuilder AddOnEnterGameStateMessage(string message)
-        {
-            room.OnEnterGameStateMessages.Add(message);
-            return this;
-        }
+        //public RoomBuilder AddOnEnterGameStateMessage(string message)
+        //{
+        //    room.OnEnterGameStateMessages.Add(message);
+        //    return this;
+        //}
 
         public RoomBuilder AddGameReference(Game _game)
         {

@@ -135,10 +135,10 @@ public class Enemy
         }
     }
 
-    public void SetFlavorText(string _flavorText)
-    {
-        FlavorText = _flavorText;
-    }
+    //public void SetFlavorText(string _flavorText)
+    //{
+    //    FlavorText = _flavorText;
+    //}
 
     public void Attack(Player player)
     {
@@ -162,10 +162,14 @@ public class Enemy
 
     public void Die()
     {
-        foreach (string message in OnEnemyDefeatedMessages)
-        {
-            game._GameData.SendMessage(message);
-        }
+        //foreach (string message in OnEnemyDefeatedMessages)
+        //{
+        //    game._GameData.SendMessage(message);
+        //}
+        
+        game.Output(OnDieText);
+        miscTools.PressKeyToContinue();
+        
     }
 
     public class EnemyBuilder
@@ -198,11 +202,11 @@ public class Enemy
             return this;
         }
 
-        public EnemyBuilder AddOnEnemyDefeatedMessage(string message)
-        {
-            enemy.OnEnemyDefeatedMessages.Add(message);
-            return this;
-        }
+        //public EnemyBuilder AddOnEnemyDefeatedMessage(string message)
+        //{
+        //    enemy.OnEnemyDefeatedMessages.Add(message);
+        //    return this;
+        //}
         
         public EnemyBuilder AddGameReference(Game _game)
         {
@@ -213,6 +217,12 @@ public class Enemy
         public EnemyBuilder AddAggro(int _aggressiveness)
         {
             enemy.Aggro = _aggressiveness;
+            return this;
+        }
+
+        public EnemyBuilder AddFlavorText(string _flavorText)
+        {
+            enemy.FlavorText = _flavorText;
             return this;
         }
 
