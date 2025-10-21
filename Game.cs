@@ -48,6 +48,11 @@ public class Game
         get => _gameData;
     }
 
+    public ObjectivesData _ObjectivesData
+    {
+        get => _objectivesData;
+    }
+
     public RoomController _RoomController
     {
         get => roomController;

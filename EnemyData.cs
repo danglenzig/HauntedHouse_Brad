@@ -31,7 +31,7 @@ public class EnemyData
         
         var ensignAbernathy = new Enemy.EnemyBuilder()
             .AddEnemyName("Ensign Abernathy")
-            .AddRoomId("CentralCorridor")
+            //.AddRoomId("CentralCorridor")
             .AddHealth(20)
             .AddAttackDamage(5)
             .AddBlockStrength(5)

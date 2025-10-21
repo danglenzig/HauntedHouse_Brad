@@ -50,6 +50,7 @@
                 .AddAdjacentRoom(Directions.Left, "MedicalBay")
                 .AddAdjacentRoom(Directions.Right, "CrewQuarters")
                 .AddAdjacentRoom(Directions.Up, "Bridge")
+                .AddCompleteObjectiveIDOnEnter("BoardTheStation")
                 .AddMiscTools()
                 .AddGameReference(game)
                 .Build();

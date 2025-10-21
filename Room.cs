@@ -13,6 +13,7 @@ public class Room
     private List<string> OnExitDialogues = new ();
     private List<string> OnEnterDialogues = new();
     //private List<string> OnEnterGameStateMessages = new();
+    private List<string> completeObjectiveIDsOnEnter = new();
     private MiscTools miscTools;
     private Game game;
     public void OnRoomEntered()
@@ -21,6 +22,14 @@ public class Room
         //{
         //    game._GameData.SendMessage(message);
         //}
+        foreach (string objID in completeObjectiveIDsOnEnter)
+        {
+            Objective objective = game._ObjectivesData.GetObjectiveByID(objID);
+            if (objective != null)
+            {
+                objective.CompleteObjective();
+            }
+        }
         PlayOnEnterDialogues();
     }
 
@@ -103,6 +112,11 @@ public class Room
             return this;
         }
 
+        public RoomBuilder AddCompleteObjectiveIDOnEnter(string _objID)
+        {
+            room.completeObjectiveIDsOnEnter.Add(_objID);
+            return this;
+        }
         //public RoomBuilder AddOnEnterGameStateMessage(string message)
         //{
         //    room.OnEnterGameStateMessages.Add(message);

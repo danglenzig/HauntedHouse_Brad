@@ -166,8 +166,11 @@ public class MovementController
     private void DisplayObjectives()
     {
         Console.Clear();
-        game.Output("<Mission objectives shown here>");
+        //game.Output("<Mission objectives shown here>");
+        Console.WriteLine("-- CURRENT MISSION OBJECTIVES --\n");
+        game.Output(game._ObjectivesData.GetStartedObjectivesDisplayString());
         miscTools.PressKeyToContinue();
+        Console.Clear();
         HandleMovement(roomController.CurrentRoom);
     }
 

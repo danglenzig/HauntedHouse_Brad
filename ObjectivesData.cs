@@ -97,4 +97,18 @@ public class ObjectivesData
             return null;
         }
     }
+
+    public string GetStartedObjectivesDisplayString()
+    {
+        string displayString = "";
+
+        foreach (Objective obj in GetObjectivesByState(EnumObjectiveState.STARTED))
+        {
+            displayString += $"- {obj.ObjectiveDisplayName}:\n    {obj.ObjectiveText}\n\n";
+        }
+
+
+        return displayString;
+    }
+    
 }
