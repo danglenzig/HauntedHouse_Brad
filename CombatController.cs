@@ -165,10 +165,19 @@ public class CombatController
                 if (currentEnemy.IsBlocking)
                 {
                     attackDamage -= currentEnemy.BlockStrength;
+                    if (attackDamage <= 0)
+                    {
+                        attackDamage = 0;
+                    }
                     currentEnemy.IsBlocking = false; // block lasts for one turn
                     miscTools.RevealText($"{currentEnemy.EnemyName} is blocking! Attack damage reduced to {attackDamage}\n", 20);
                     miscTools.PressKeyToContinue();
                 }
+                if (attackDamage <= 0)
+                {
+                    attackDamage = 0;
+                }
+                
                 if (currentEnemy.Health - attackDamage <= 0)
                 {
                     currentEnemy.Health = 0;
@@ -192,9 +201,17 @@ public class CombatController
                 if (player.IsBlocking)
                 {
                     attackDamage -= player.BlockStrength;
+                    if (attackDamage <= 0)
+                    {
+                        attackDamage = 0;
+                    }
                     player.IsBlocking = false;
                     miscTools.RevealText($"{player.Name} is blocking! Attack damage reduced to {attackDamage}\n", 20);
                     miscTools.PressKeyToContinue();
+                }
+                if (attackDamage <= 0)
+                {
+                    attackDamage = 0;
                 }
 
                 if (player.Health - attackDamage <= 0)

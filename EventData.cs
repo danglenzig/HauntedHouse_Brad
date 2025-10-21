@@ -1,4 +1,4 @@
-﻿namespace HauntedHouse
+﻿ namespace HauntedHouse
 {
     public class EventData
     {
