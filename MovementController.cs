@@ -30,6 +30,8 @@ public class MovementController
     {
         //Console.Clear();
         Console.WriteLine("\nYou can move in the following directions in this room:\n");
+        
+        List<string> availableDirections = new List<string>();
 
         foreach (var adjacentRoom in currentRoom.AdjacentRooms)
         {
@@ -46,10 +48,12 @@ public class MovementController
                     case Directions.Up:
                         //promtString = "˄";
                         directionString = $"Up to {displayName}";
+                        availableDirections.Add("UP");
                         break;
                     case Directions.Down:
                         //promtString = "˅";
                         directionString = $"Down to {displayName}";
+                        availableDirections.Add("DOWN");
                         break;
                 }
             }
@@ -60,18 +64,22 @@ public class MovementController
                     case Directions.Up:
                         //promtString = "˄";
                         directionString = $"North to {displayName}";
+                        availableDirections.Add("UP");
                         break;
                     case Directions.Down:
                         //promtString = "˅";
                         directionString = $"South to {displayName}";
+                        availableDirections.Add("DOWN");
                         break;
                     case Directions.Left:
                         //promtString = "˂";
                         directionString = $"West to {displayName}";
+                        availableDirections.Add("LEFT");
                         break;
                     case Directions.Right:
                         //promtString = "\t˃";
                         directionString = $"East to {displayName}";
+                        availableDirections.Add("RIGHT");
                         break;
                 }
             }
@@ -89,7 +97,46 @@ public class MovementController
         {
             Console.WriteLine("\nPress any corresponding arrow keys to continue..\n");
             _pressedKeyInfo = Console.ReadKey();
-            keyIsValid = (_pressedKeyInfo.Key == ConsoleKey.LeftArrow  || _pressedKeyInfo.Key == ConsoleKey.RightArrow || _pressedKeyInfo.Key == ConsoleKey.UpArrow  || _pressedKeyInfo.Key == ConsoleKey.DownArrow);
+
+            keyIsValid = true;
+            
+            if (!(_pressedKeyInfo.Key == ConsoleKey.LeftArrow || _pressedKeyInfo.Key == ConsoleKey.RightArrow ||
+                  _pressedKeyInfo.Key == ConsoleKey.UpArrow || _pressedKeyInfo.Key == ConsoleKey.DownArrow))
+            {
+                keyIsValid = false;
+            }
+
+            switch (_pressedKeyInfo.Key)
+            {
+                case ConsoleKey.LeftArrow:
+                    if (!availableDirections.Contains("LEFT"))
+                    {
+                        keyIsValid = false;
+                    }
+                    break;
+                case ConsoleKey.RightArrow:
+                    if (!availableDirections.Contains("RIGHT"))
+                    {
+                        keyIsValid = false;
+                    }
+                    break;
+                case ConsoleKey.UpArrow:
+                    if (!availableDirections.Contains("UP"))
+                    {
+                        keyIsValid = false;
+                    }
+                    break;
+                case ConsoleKey.DownArrow:
+                    if (!availableDirections.Contains("DOWN"))
+                    {
+                        keyIsValid = false;
+                    }
+                    break;
+            }
+            
+            
+            
+            //keyIsValid = (_pressedKeyInfo.Key == ConsoleKey.LeftArrow  || _pressedKeyInfo.Key == ConsoleKey.RightArrow || _pressedKeyInfo.Key == ConsoleKey.UpArrow  || _pressedKeyInfo.Key == ConsoleKey.DownArrow);
         }
         
         return _pressedKeyInfo.Key;
